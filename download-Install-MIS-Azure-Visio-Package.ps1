@@ -45,10 +45,8 @@ function DownloadGitHubRepository {
     return $unzipFolder
 }
 
-#[String]$location = Split-Path -Parent $PSCommandPath
-[String]$gitHubFolder = (DownloadGithubRepository -Name 'Microsoft-Integration-and-Azure-Stencils-Pack-for-Visio' -Author 'sandroasp' -Location $location)[-1]
-
 [String]$location = Get-Location
+[String]$gitHubFolder = (DownloadGithubRepository -Name 'Microsoft-Integration-and-Azure-Stencils-Pack-for-Visio' -Author 'sandroasp' -Location $location)[-1]
 [String]$destination = Get-ChildItem HKCU:\Software\Microsoft\Office\ -Recurse | Where-Object { $_.PSChildName -eq 'Application' } | Get-ItemProperty -Name MyShapesPath | Select-Object -ExpandProperty MyShapesPath
 
 Write-Host 'Starting to install Microsoft Integration & Azure Stencils Pack locally'

@@ -5,14 +5,12 @@
 #                                                       #
 #########################################################
 
-[String]$location = Split-Path -Parent $PSCommandPath
-[String]$destination = Get-ChildItem HKCU:\Software\Microsoft\Office\ -Recurse | Where-Object {$_.PSChildName -eq "Application"} | Get-ItemProperty -Name MyShapesPath | Select-Object -ExpandProperty MyShapesPath
+[String]$location = $psscriptroot
+[String]$destination = Get-ChildItem HKCU:\Software\Microsoft\Office\ -Recurse | Where-Object { $_.PSChildName -eq 'Application' } | Get-ItemProperty -Name MyShapesPath | Select-Object -ExpandProperty MyShapesPath
 
-$files = Get-ChildItem $location -recurse -force -Filter *.vssx
-foreach($file in $files)
-{
-    if($file.PSPath.Contains("Previous Versions") -eq $false)
-    {
-        Copy-Item -Path $file.PSPath -Destination $destination -force
+$files = Get-ChildItem $location -Recurse -Force -Filter *.vssx
+foreach ($file in $files) {
+    if ($file.PSPath.Contains('Previous Versions') -eq $false) {
+        Copy-Item -Path $file.PSPath -Destination $destination -Force
     }
 }

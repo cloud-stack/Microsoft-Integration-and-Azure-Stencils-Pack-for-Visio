@@ -45,7 +45,7 @@ function DownloadGitHubRepository {
     return $unzipFolder
 }
 
-[String]$location = Split-Path -Parent $PSCommandPath
+#[String]$location = Split-Path -Parent $PSCommandPath
 [String]$gitHubFolder = (DownloadGithubRepository -Name 'Microsoft-Integration-and-Azure-Stencils-Pack-for-Visio' -Author 'sandroasp' -Location $location)[-1]
 
 [String]$location = Get-Location
